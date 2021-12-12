@@ -1,4 +1,4 @@
-//
+// Colors related styling
 
 $fg-primary: #ffffff;
 $bg-primary: #f8ad48;
@@ -8,3 +8,14 @@ $bg-cold-temp: #1da9c2;
 
 // Shadow
 $main-shadow: 0px 0px 32px rgba(0, 0, 0, 0.25);
+
+// Temperature dependant color classes
+.hot-temperature {
+  --bg-bottom-left: #d9547b;
+}
+.average-temperature {
+  --bg-bottom-left: #71376e;
+}
+.cold-temperature {
+  --bg-bottom-left: #1da9c2;
+}
