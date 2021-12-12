@@ -1,0 +1,11 @@
+// Homepage/landing page specific styling
+
+body#home {
+  overflow-x: hidden;
+  min-height: 100vh;
+  background-color: var(--bg-bottom-left);
+  background-image: linear-gradient(73deg, rgba(255, 255, 255, 0), $bg-primary);
+  font-family: $primary-font-fam;
+  color: $fg-primary;
+  transition: background-color 350ms linear;
+}
