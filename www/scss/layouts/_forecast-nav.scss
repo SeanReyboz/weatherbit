@@ -1,0 +1,39 @@
+.forecast-days-list {
+  margin-top: 130px;
+  max-width: max-content;
+  margin-inline: auto;
+
+  ul {
+    display: flex;
+
+    li:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+
+    button {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 1rem;
+      color: $fg-primary;
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 200ms ease;
+
+      &.active {
+        color: #000;
+        border-color: $fg-primary;
+        background-color: $fg-primary;
+      }
+
+      &:hover {
+        border-color: $fg-primary;
+      }
+    }
+  }
+}
