@@ -1,6 +1,12 @@
 <h1 align="center">weatherbit</h1>
+<h5 align="center">
+    A simple weather forecast website that leverages the weatherbit.io API
+</h5>
 <br />
-A simple weather forecast website that leverages the weatherbit.io API
+<p align="center">
+    <img src="./workspace/preview/scrot.png" alt="Project preview" />
+</p>
+<br />
 
 ### Project Structure
 
