@@ -1,0 +1,83 @@
+// Common header styling
+
+.main-header {
+  max-width: 1440px;
+  height: 80px;
+  margin-top: 2rem;
+  margin-inline: auto;
+  padding-inline: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  #search-form {
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+    background-color: $fg-primary;
+    box-shadow: $main-shadow;
+
+    #search-icon {
+      padding: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 50%;
+      background-color: $fg-primary;
+    }
+
+    #search-input {
+      padding: 0.2rem;
+      border: none;
+      outline: none;
+      font-family: $primary-font-fam;
+      font-size: 24px;
+      line-height: 2rem;
+      color: #000;
+
+      &::placeholder {
+        opacity: 0.2;
+      }
+    }
+
+    #submit-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: var(--margin);
+      padding: 20px 2rem;
+      cursor: pointer;
+      border: none;
+      border-radius: inherit;
+      color: $fg-primary;
+      background-color: #000;
+      font-family: $primary-font-fam;
+      font-size: 14px;
+      line-height: 1rem;
+    }
+
+    .inputs {
+      display: flex;
+      align-items: center;
+      border-radius: inherit;
+      transition: max-width 0.7s ease;
+      max-width: 0px;
+      overflow: hidden;
+
+      & > * {
+        opacity: 0;
+      }
+    }
+
+    .input-visible {
+      max-width: 612px;
+      --margin: 12px;
+      transition: max-width 0.8s ease-in;
+
+      & > * {
+        opacity: 1;
+      }
+    }
+  }
+}
