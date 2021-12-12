@@ -1,7 +1,15 @@
 @charset "UTF-8";
 
-@import "base/reset";
-@import "base/colors";
-@import "base/fonts";
-@import "layouts/header";
-@import "pages/home";
+// ~~ base
+@import "./base/reset";
+@import "./base/colors";
+@import "./base/fonts";
+@import "./base/wrapper";
+
+// ~~ layouts
+@import "./layouts/header";
+@import "./layouts/forecast";
+@import "./layouts/forecast-nav";
+
+// ~~ pages
+@import "./pages/home";
