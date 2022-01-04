@@ -1,26 +1,21 @@
 <?php
 /**
  * @author Sean Reyboz
- * @version 1.1 -- 21 Septembre 2021
+ * @version 1.2 -- 04 Janvier 2022
  */
 
 define("BASE_URL", "https://api.weatherbit.io/v2.0/forecast/daily?");
 define("API_KEY", "&key=6a95e0586d2d496bbef04ff367a2ed53");
 
+define("DAYS", 7);    // Nombre de jours de prévision
 
-// Nombre de jours de prévision
-$days = 7;
 
 // Vérifier que des données soient présentes dans la requête reçue.
-if (!empty($_REQUEST) && !empty($_REQUEST['city'])) {
-        $location_input = $_REQUEST['city'];
-	    $location = urlencode($location_input);
-	} else {
-		$location = urlencode('Paris');
-	}
+$location = (!empty($_REQUEST) && !empty($_REQUEST['city'])) ? urlencode($_REQUEST['city']) : 'Paris';
+
 
 // Création de la requête à utiliser pr interroger l'API.
-$requete = BASE_URL . "days=" . $days . "&city=" . $location . API_KEY;
+$requete = BASE_URL . "days=" . DAYS . "&city=" . $location . API_KEY;
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $requete);
@@ -28,8 +23,9 @@ curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $raw_json = curl_exec($ch);
 
-// Si l'objet retourné par l'API n'est pas vide, le transformer pour parser les
-// informations nécessaires.
+// Si l'objet JSON retourné par l'API n'est pas vide, le décoder pour récupérer
+// les informations nécessaires. 
+// Dans le cas contraire, afficher un message d'erreur et quitter le script.
 if (!empty($raw_json))
 	$decoded_json = json_decode($raw_json, true);
 else {
@@ -38,13 +34,13 @@ else {
 }
 
 curl_close($ch);
-// print_r($decoded_json);
+
 
 /** ---------------------------------
  *      Définition des variables
  * ---------------------------------- */
 
-// Définir une timezone par défaut pour date().
+// Définir une timezone par défaut pour date() et récupérer la date actuelle
 date_default_timezone_set('Europe/Paris');
 $today = date("j F");
 
@@ -69,12 +65,11 @@ $result = [];
 
 $city = $decoded_json['city_name'];
 
-for ($i = 0; $i < $days; $i++) {
+for ($i = 0; $i < DAYS; $i++) {
 	foreach ($decoded_json['data'][$i] as $key => $value) {
 
-		if ($key == "weather") {
+		if ($key == "weather")
 			$weather_code = $value['code'];
-		}
 		
 		/**
 		 * Récupérer la date et la convertir dans différents fomats:
@@ -110,9 +105,11 @@ for ($i = 0; $i < $days; $i++) {
 		if ($key == "pod")
 			$pod = ($value == 'n') ? "night" : "day";
 		
-		// Convertir la vitesse du vent en km/h et arrondir le résultat.
+		// La vitesse du vent étant en noeuds, la convertir en km/h puis
+		// arrondir le résultat.
 		if ($key == "wind_gust_spd") 
 			$wind_gust = round($value * 3.6, 1);
+
 	}
 	
 	$result[$i] = [
@@ -129,6 +126,7 @@ for ($i = 0; $i < $days; $i++) {
 }
 
 
+// Retourner une version encodée du tableau de données
 echo json_encode($result);
 
 ?>
