@@ -53,6 +53,7 @@ $icons: wind, sunrise, sunset, precipitation;
 
 .forecast-temp-weather {
   position: relative;
+  pointer-events: none;
 
   #temperature {
     font-size: 340px;
