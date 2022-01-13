@@ -105,7 +105,7 @@ for ($i = 0; $i < DAYS; $i++) {
 		if ($key == "pod")
 			$pod = ($value == 'n') ? "night" : "day";
 		
-		// La vitesse du vent étant en noeuds, la convertir en km/h puis
+		// La vitesse du vent étant en m/s, la convertir en km/h puis
 		// arrondir le résultat.
 		if ($key == "wind_gust_spd") 
 			$wind_gust = round($value * 3.6, 1);
